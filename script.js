@@ -21,7 +21,8 @@ L.tileLayer(
 // Star player images
 const starPlayers = {
   "Los Angeles Lakers": "lebron.png",
-  "Denver Nuggets": "jokic.png"
+  "Denver Nuggets": "jokic.png",
+  "Boston Celtics": "jb.png"
 };
 
 
