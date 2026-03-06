@@ -1,4 +1,4 @@
-const API_KEY = "YOUR_API_KEY";
+const API_KEY = "bf7b52a8-b4de-40bf-bf89-0b4fc699306c";
 
 // Initial map view
 const initialView = {
