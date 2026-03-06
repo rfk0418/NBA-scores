@@ -47,19 +47,3 @@ body {
   display: block;
 }
 
-/* Pulse glow animation */
-@keyframes glowPulse {
-  0% {
-    filter: drop-shadow(0 0 2px lime) drop-shadow(0 0 4px lime);
-  }
-  50% {
-    filter: drop-shadow(0 0 10px lime) drop-shadow(0 0 20px lime);
-  }
-  100% {
-    filter: drop-shadow(0 0 2px lime) drop-shadow(0 0 4px lime);
-  }
-}
-
-.live-glow {
-  animation: glowPulse 1.5s infinite;
-}
