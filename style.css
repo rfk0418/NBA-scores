@@ -1,0 +1,65 @@
+body {
+  margin:0;
+  font-family: Arial;
+  text-align:center;
+}
+
+#map {
+  height: 90vh;
+  width: 100%;
+}
+
+.leaflet-marker-icon {
+  border-radius: 50%;
+  border: 2px solid white;
+}
+  
+.leaflet-popup-content-wrapper {
+  background-color: #1f2937;
+  color: white;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.leaflet-popup-tip {
+  background-color: #1f2937;
+}
+
+.game-popup {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.leaflet-marker-icon {
+  filter: drop-shadow(0px 0px 4px white);
+}
+
+.transparent-divicon {
+  background: none !important;
+  border: none !important;
+}
+
+.team-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Pulse glow animation */
+@keyframes glowPulse {
+  0% {
+    filter: drop-shadow(0 0 2px lime) drop-shadow(0 0 4px lime);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px lime) drop-shadow(0 0 20px lime);
+  }
+  100% {
+    filter: drop-shadow(0 0 2px lime) drop-shadow(0 0 4px lime);
+  }
+}
+
+.live-glow {
+  animation: glowPulse 1.5s infinite;
+}
