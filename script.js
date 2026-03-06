@@ -30,9 +30,10 @@ const starPlayers = {
 function playerIcon(image) {
   return L.icon({
     iconUrl: `players/${image}`,
-    iconSize: [80, 80],
-    iconAnchor: [40, 40],
-    popupAnchor: [0, -40]
+    iconSize: [80, 80],         // same as CSS width/height
+    iconAnchor: [40, 40],       // center the icon
+    popupAnchor: [0, -40],
+    className: "player-icon"    // connects CSS class
   });
 }
 
