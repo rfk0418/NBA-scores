@@ -21,6 +21,14 @@ body {
   padding: 6px 10px;
 }
 
+.leaflet-marker-icon.player-icon {
+  border-radius: 50%;           /* makes it circular */
+  width: 80px;                  /* matches your iconSize */
+  height: 80px;
+  object-fit: cover;            /* ensures the image fills the circle */
+  box-shadow: 0 0 5px rgba(0,0,0,0.5); /* subtle shadow for clarity */
+}
+
 .leaflet-popup-tip {
   background-color: #1f2937;
 }
