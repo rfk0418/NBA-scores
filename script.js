@@ -17,6 +17,7 @@ L.tileLayer(
   maxZoom: 19
 }).addTo(map);
 
+//lat/lon of arenas
 const teamLocations = {
 "Atlanta Hawks":[33.7573,-84.3963],
 "Boston Celtics":[42.3662,-71.0621],
