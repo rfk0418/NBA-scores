@@ -1,103 +1,66 @@
-const API_KEY = "bf7b52a8-b4de-40bf-bf89-0b4fc699306c";
+const API_KEY = "YOUR_API_KEY";
 
-const map = L.map("map").setView([39.5, -98.35], 4);
-
+// Initial map view
 const initialView = {
   center: [39.5, -98.35],
   zoom: 4
 };
 
-const teamLogos = {
-"Atlanta Hawks":"hawks.png",
-"Boston Celtics":"celtics.png",
-"Brooklyn Nets":"nets.png",
-"Charlotte Hornets":"hornets.png",
-"Chicago Bulls":"bulls.png",
-"Cleveland Cavaliers":"cavs.png",
-"Dallas Mavericks":"mavs.png",
-"Denver Nuggets":"nuggets.png",
-"Detroit Pistons":"pistons.png",
-"Golden State Warriors":"warriors.png",
-"Houston Rockets":"rockets.png",
-"Indiana Pacers":"pacers.png",
-"Los Angeles Clippers":"clippers.png",
-"Los Angeles Lakers":"lakers.png",
-"Memphis Grizzlies":"grizzlies.png",
-"Miami Heat":"heat.png",
-"Milwaukee Bucks":"bucks.png",
-"Minnesota Timberwolves":"timberwolves.png",
-"New Orleans Pelicans":"pelicans.png",
-"New York Knicks":"knicks.png",
-"Oklahoma City Thunder":"thunder.png",
-"Orlando Magic":"magic.png",
-"Philadelphia 76ers":"sixers.png",
-"Phoenix Suns":"suns.png",
-"Portland Trail Blazers":"blazers.png",
-"Sacramento Kings":"kings.png",
-"San Antonio Spurs":"spurs.png",
-"Toronto Raptors":"raptors.png",
-"Utah Jazz":"jazz.png",
-"Washington Wizards":"wizards.png"
-};
+const map = L.map("map").setView(initialView.center, initialView.zoom);
 
-const starPlayers = {
-  "Los Angeles Lakers": "lebron.png",
-  "Denver Nuggets": "jokic.png"
-};
-//https://cartocdn_{s}.global.ssl.fastly.net/base-midnight/{z}/{x}/{y}.png
-//https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png
+// Dark map
 L.tileLayer(
-'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
+  'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
 {
   attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
   subdomains: 'abcd',
   maxZoom: 19
 }).addTo(map);
 
-//Add reset button
-const resetControl = L.control({position: 'topright'});
-resetControl.onAdd = function(map) {
-  const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-  div.innerHTML = '<a href="#" title="Reset Map">⤺</a>';
-  div.style.textAlign = "center";
-  div.style.fontSize = "18px";
-  div.style.lineHeight = "26px";
-  div.style.width = "26px";
-  div.style.height = "26px";
-  div.style.cursor = "pointer";
-  div.style.backgroundColor = "white";
-  div.style.color = "black";
-  div.style.borderRadius = "4px";
-
-  div.onclick = () => {
-    map.setView(initialView.center, initialView.zoom);
-    playerLayer.clearLayers(); // hide player markers when zoomed out
-  };
-
-  return div;
+// Star player images
+const starPlayers = {
+  "Los Angeles Lakers": "lebron.png",
+  "Denver Nuggets": "jokic.png",
+  "Boston Celtics": "celtics.png",
+  "Dallas Mavericks": "mavs.png"
 };
-resetControl.addTo(map);
 
+// Create player icon
 function playerIcon(image) {
   return L.icon({
     iconUrl: `players/${image}`,
-    iconSize: [100,100],
-    iconAnchor: [50,50],
-    popupAnchor: [0,-25]
+    iconSize: [80, 80],
+    iconAnchor: [40, 40],
+    popupAnchor: [0, -40]
   });
 }
 
-function teamLogoIcon(image, isLive = false) {
-  // Use divIcon with an <img> so we can apply a CSS class to the image
-  return L.divIcon({
-    html: `<img src="logos/${image}" class="team-logo ${isLive ? 'live-glow' : ''}" />`,
-    className: 'transparent-divicon', // no background on the div
-    iconSize: [40, 40],
-    iconAnchor: [20, 20],
-    popupAnchor: [0, -20]
-  });
-}
+// Reset view button
+const resetControl = L.control({ position: "topright" });
 
+resetControl.onAdd = function () {
+
+  const div = L.DomUtil.create("div", "leaflet-bar leaflet-control");
+
+  div.innerHTML = "⤺";
+
+  div.style.width = "30px";
+  div.style.height = "30px";
+  div.style.lineHeight = "30px";
+  div.style.textAlign = "center";
+  div.style.background = "white";
+  div.style.cursor = "pointer";
+  div.style.fontSize = "18px";
+
+  div.onclick = () => {
+    map.setView(initialView.center, initialView.zoom);
+  };
+  return div;
+};
+
+resetControl.addTo(map);
+
+// Fetch games
 async function getGames() {
 
   const today = new Date().toLocaleDateString("en-CA");
@@ -110,88 +73,44 @@ async function getGames() {
   );
 
   const data = await response.json();
-
   displayGames(data.data);
 }
 
-const PLAYER_ZOOM_THRESHOLD = 8; // zoom level at which player icons appear
-const playerLayer = L.layerGroup().addTo(map); // layer for all player markers
-const arenaLayer = L.layerGroup().addTo(map);
-
+// Display markers
 function displayGames(games) {
+
   games.forEach(game => {
+
     const homeTeam = game.home_team.full_name;
+    const visitorTeam = game.visitor_team.full_name;
+
     const location = teamLocations[homeTeam];
     if (!location) return;
 
-    const offset = 0.2;
-    const isLive = game.status === "Live"; // detect live game
-    const logo = teamLogos[homeTeam];
-
-    // Optional: add halo circle behind logo for live game
-    if (isLive) {
-      L.circleMarker(location, {
-        radius: 15,
-        color: "lime",
-        fillColor: "lime",
-        fillOpacity: 0.2,
-        weight: 2
-      }).addTo(arenaLayer);
-    }
+    const playerImage = starPlayers[homeTeam];
+    if (!playerImage) return;
 
     const popup = `
       <div class="game-popup">
-        <b>${game.visitor_team.full_name}</b> ${game.visitor_team_score}<br>
+        <b>${visitorTeam}</b> ${game.visitor_team_score}<br>
         <b>${homeTeam}</b> ${game.home_team_score}<br><br>
         Status: ${game.status}
       </div>
     `;
 
-    const arenaMarker = L.marker(location, {
-      icon: teamLogoIcon(logo, isLive)
-    }).addTo(arenaLayer).bindPopup(popup);
+    L.marker(location, {
+      icon: playerIcon(playerImage)
+    })
+    .addTo(map)
+    .bindPopup(popup);
 
-    arenaMarker.on("click", () => {
-      map.setView(location, 11);
-      showPlayersForGame(game, location, offset, popup);
-    });
   });
+
 }
 
-// Function to create and show player markers for a specific game
-function showPlayersForGame(game, location, offset, popup) {
-  playerLayer.clearLayers(); // remove any previous player markers
-
-  const homeStar = starPlayers[game.home_team.full_name];
-  const visitorStar = starPlayers[game.visitor_team.full_name];
-
-  if (visitorStar) {
-    const visitorMarker = L.marker(
-      [location[0], location[1] - offset],
-      { icon: playerIcon(visitorStar) }
-    ).bindPopup(popup);
-    playerLayer.addLayer(visitorMarker);
-  }
-
-  if (homeStar) {
-    const homeMarker = L.marker(
-      [location[0], location[1] + offset],
-      { icon: playerIcon(homeStar) }
-    ).bindPopup(popup);
-    playerLayer.addLayer(homeMarker);
-  }
-}
-
-//auto-hide player markers when zoomed out
-map.on("zoomend", () => {
-  if (map.getZoom() < PLAYER_ZOOM_THRESHOLD) {
-    map.removeLayer(playerLayer);
-  } else {
-    map.addLayer(playerLayer);
-  }
-});
 getGames();
 
+// Refresh every minute
 setInterval(() => {
   location.reload();
 }, 60000);
