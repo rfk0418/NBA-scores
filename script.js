@@ -17,6 +17,15 @@ L.tileLayer(
   maxZoom: 19
 }).addTo(map);
 
+
+// Star player images
+const starPlayers = {
+  "Los Angeles Lakers": "lebron.png",
+  "Denver Nuggets": "jokic.png",
+  "Boston Celtics": "celtics.png",
+  "Dallas Mavericks": "mavs.png"
+};
+
 //lat/lon of arenas
 const teamLocations = {
 "Atlanta Hawks":[33.7573,-84.3963],
@@ -51,13 +60,6 @@ const teamLocations = {
 "Washington Wizards":[38.8981,-77.0209]
 };
 
-// Star player images
-const starPlayers = {
-  "Los Angeles Lakers": "lebron.png",
-  "Denver Nuggets": "jokic.png",
-  "Boston Celtics": "celtics.png",
-  "Dallas Mavericks": "mavs.png"
-};
 
 // Create player icon
 function playerIcon(image) {
@@ -68,6 +70,7 @@ function playerIcon(image) {
     popupAnchor: [0, -40]
   });
 }
+
 
 // Reset view button
 const resetControl = L.control({ position: "topright" });
@@ -89,10 +92,12 @@ resetControl.onAdd = function () {
   div.onclick = () => {
     map.setView(initialView.center, initialView.zoom);
   };
+
   return div;
 };
 
 resetControl.addTo(map);
+
 
 // Fetch games
 async function getGames() {
@@ -107,8 +112,10 @@ async function getGames() {
   );
 
   const data = await response.json();
+
   displayGames(data.data);
 }
+
 
 // Display markers
 function displayGames(games) {
@@ -142,7 +149,9 @@ function displayGames(games) {
 
 }
 
+
 getGames();
+
 
 // Refresh every minute
 setInterval(() => {
