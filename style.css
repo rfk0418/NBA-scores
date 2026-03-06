@@ -31,15 +31,6 @@ body {
   font-size: 14px;
 }
 
-.leaflet-marker-icon {
-  filter: drop-shadow(0px 0px 4px white);
-}
-
-.transparent-divicon {
-  background: none !important;
-  border: none !important;
-}
-
 .team-logo {
   width: 80px;
   height: 80px;
