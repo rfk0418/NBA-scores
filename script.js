@@ -109,7 +109,7 @@ function displayGames(games) {
       leadingTeam = homeTeam; // if tied, default to home team
     }
 
-    const location = teamLocations[leadingTeam];
+    const location = teamLocations[homeTeam];
     if (!location) return;
 
     const playerImage = starPlayers[leadingTeam];
