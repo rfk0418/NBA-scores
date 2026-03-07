@@ -92,16 +92,30 @@ function displayGames(games) {
     const homeTeam = game.home_team.full_name;
     const visitorTeam = game.visitor_team.full_name;
 
-    const location = teamLocations[homeTeam];
+    const homeScore = game.home_team_score;
+    const visitorScore = game.visitor_team_score;
+
+    // Determine which team is leading
+    let leadingTeam;
+
+    if (homeScore > visitorScore) {
+      leadingTeam = homeTeam;
+    } else if (visitorScore > homeScore) {
+      leadingTeam = visitorTeam;
+    } else {
+      leadingTeam = homeTeam; // if tied, default to home team
+    }
+
+    const location = teamLocations[leadingTeam];
     if (!location) return;
 
-    const playerImage = starPlayers[homeTeam];
+    const playerImage = starPlayers[leadingTeam];
     if (!playerImage) return;
 
     const popup = `
       <div class="game-popup">
-        <b>${visitorTeam}</b> ${game.visitor_team_score}<br>
-        <b>${homeTeam}</b> ${game.home_team_score}<br><br>
+        <b>${visitorTeam}</b> ${visitorScore}<br>
+        <b>${homeTeam}</b> ${homeScore}<br><br>
         Status: ${game.status}
       </div>
     `;
