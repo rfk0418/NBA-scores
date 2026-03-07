@@ -29,7 +29,9 @@ const starPlayers = {
   "Portland Trail Blazers": "dame.png",
   "Houston Rockets": "kd.png",
   "Phoenix Suns": "booker.png",
-  "New Orleans Pelicans": "zion.png"
+  "New Orleans Pelicans": "zion.png",
+  "Miami Heat": "bam.png",
+  "Los Angeles CLippers": "kawhi.png"
   
 };
 
