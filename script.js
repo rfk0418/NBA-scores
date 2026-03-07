@@ -25,7 +25,9 @@ const starPlayers = {
   "Boston Celtics": "jb.png",
   "Charlotte Hornets": "lamelo.png",
   "New York Knicks": "brunson.png",
-  "San Antonio Spurs": "wemby.png"
+  "San Antonio Spurs": "wemby.png",
+  "Portland Trail Blazers": "dame.png",
+  "Houston Rockets": "kd.png"
   
 };
 
