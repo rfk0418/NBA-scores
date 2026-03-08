@@ -22,8 +22,8 @@ L.tileLayer(
 const starPlayers = {
   "Los Angeles Lakers": "lebron.png",
   "Denver Nuggets": "jokic.png",
-  "Boston Celtics": "jb.png",
-  "Charlotte Hornets": "lamelo.png",
+  "Boston Celtics": "yay.png",
+  "Charlotte Hornets": "lamelo.pnyg",
   "New York Knicks": "brunson.png",
   "San Antonio Spurs": "wemby.png",
   "Portland Trail Blazers": "dame.png",
