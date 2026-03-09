@@ -38,7 +38,8 @@ const starPlayers = {
   "Cleveland Cavaliers": "mitch.png",
   "Brooklyn Nets": "porterjr.png",
   "Memphis Grizzlies": "ja.png",
-  "Philadelphia 76ers": "maxey.png"
+  "Philadelphia 76ers": "maxey.png",
+  "Utah Jazz": "markkanen.png"
   
 };
 
