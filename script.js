@@ -39,7 +39,10 @@ const starPlayers = {
   "Brooklyn Nets": "porterjr.png",
   "Memphis Grizzlies": "ja.png",
   "Philadelphia 76ers": "maxey.png",
-  "Utah Jazz": "markkanen.png"
+  "Utah Jazz": "markkanen.png",
+  "Milwaukee Bucks": "giannis.png",
+  "Chicago Bulls": "giddey.png",
+  "Toronto Raptors": "barnes.png"
   
 };
 
