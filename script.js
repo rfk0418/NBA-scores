@@ -47,7 +47,8 @@ const starPlayers = {
   "Sacramento Kings": "lavine.png",
   "Washington Wizards": "davis.png",
   "Orlando Magic": "paolo.png",
-  "Detroit Pistons": "cade.png"
+  "Detroit Pistons": "cade.png",
+  "Atlanta Hawks": "johnson.png"
   
 };
 
