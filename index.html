@@ -9,8 +9,17 @@
     const day = today.getDate();
     const year = today.getFullYear();
 
-    document.title = `NBA Scores - ${monthName} ${day}, ${year}`;
+    const formatted = `NBA Scores - ${monthName} ${day}, ${year}`;
+
+    // Set page title
+    document.title = formatted;
+
+    // Wait until page loads to safely update h1
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('page-header').textContent = formatted;
+    });
   </script>
+
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet/dist/leaflet.css"
@@ -21,7 +30,7 @@
 
 <body>
 
-<h1>Happy Sad NBA</h1>
+<h1 id="page-header">NBA Scores</h1>
 
 <div id="map"></div>
 
