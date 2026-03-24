@@ -2,7 +2,15 @@
 <html>
 <head>
   <title>NBA Scores</title>
+  <script>
+    const today = new Date();
 
+    const monthName = today.toLocaleString('default', { month: 'long' });
+    const day = today.getDate();
+    const year = today.getFullYear();
+
+    document.title = `NBA Scores - ${monthName} ${day}, ${year}`;
+  </script>
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet/dist/leaflet.css"
