@@ -1,4 +1,5 @@
 const API_KEY = "bf7b52a8-b4de-40bf-bf89-0b4fc699306c";
+const CARTO_KEY = "cb1_4ayv_1_62b33aa299cbef70f5a3b582";
 
 // Initial map view
 const initialView = {
@@ -10,12 +11,12 @@ const map = L.map("map").setView(initialView.center, initialView.zoom);
 
 // Dark map
 L.tileLayer(
-  'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-{
-  attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-  subdomains: 'abcd',
-  maxZoom: 19
-}).addTo(map);
+  `https://basemaps.cartocdn.com/rastertiles/dark_nolabels/{z}/{x}/{y}{r}.png?key=${CARTO_KEY}`,
+  {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    maxZoom: 20
+  }
+).addTo(map);
 
 
 // Star player images
