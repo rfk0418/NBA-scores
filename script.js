@@ -98,14 +98,28 @@ async function getGames() {
 
   const today = new Date().toLocaleDateString("en-CA");
 
-  const response = await fetch(
-    `https://api.balldontlie.io/v1/games?dates[]=${today}`,
+  // Try preseason first
+  let response = await fetch(
+    `https://api.balldontlie.io/v1/games?dates[]=${today}&season_type=preseason`,
     {
       headers: { Authorization: API_KEY }
     }
   );
 
-  const data = await response.json();
+  let data = await response.json();
+
+  // If there are no preseason games today, try regular season
+  if (!data.data || data.data.length === 0) {
+
+    response = await fetch(
+      `https://api.balldontlie.io/v1/games?dates[]=${today}&season_type=regular`,
+      {
+        headers: { Authorization: API_KEY }
+      }
+    );
+
+    data = await response.json();
+  }
 
   displayGames(data.data);
 }
